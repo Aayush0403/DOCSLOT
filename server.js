@@ -15,9 +15,7 @@ connectDB();
 // static files for build
 app.use(express.static(path.join(__dirname,'./client/build')))
 
-app.get('*',function(req,res){
-  res.sendFile(path.join(__dirname,'./client/build/index.html'))
-})
+
 
 
 //middlewares
@@ -31,6 +29,11 @@ app.use(morgan('dev'))
 app.use("/api/v1/user", require("./routes/userRoutes"));
 app.use("/api/v1/admin", require("./routes/adminRoutes"));
 app.use("/api/v1/doctor", require("./routes/doctorRoutes"));
+
+
+app.get('/*',function(req,res){
+  res.sendFile(path.join(__dirname,'./client/build/index.html'))
+})
 
 //port
 const port = process.env.PORT || 6000;
